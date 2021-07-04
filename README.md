@@ -1,7 +1,7 @@
 # test-bot
 This is the bot that I test everything on.
 # Current Issues
-None.
+ - Need to fix the permissions system so that it works per-command and gives an error if the user does not have the perms or the bot doesn't have the perms.
 # Currently Adding...
 Audit Logs
  - ~~on/off~~ added to DB

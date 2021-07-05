@@ -7,7 +7,8 @@ module.exports = {
     usage: 's.bot',
     inHelp: 'yes',
     example: 's.bot or s.sakuramoon',
-    execute (message, args) {
+    execute(message, args) {
+        console.log('test')
         let days = Math.floor(message.client.uptime / 86400000);
         let hours = Math.floor(message.client.uptime / 3600000) % 24;
         let minutes = Math.floor(message.client.uptime / 60000) % 60;
@@ -22,6 +23,7 @@ module.exports = {
             { name: '🌑Invite Sakura to your server', value: 'https://discord.com/oauth2/authorize?client_id=819997306732019742&permissions=8&scope=bot', inline: false },
             { name: '⬆️ Vote for me on Top.gg', value: 'https://top.gg/bot/819997306732019742', inline: false },
             { name: '👩‍💻Developer', value: 'Erin Skidds', inline: false },
+            { name: 'Prefix', value: '\`test.\`'}
         )
         .setFooter('©️ 2021 Sakura Moon - Erin Skidds - DudeThatsErin#8061');
 

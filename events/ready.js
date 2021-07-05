@@ -1,4 +1,4 @@
-const Discord = require('discord.js');
+const connection = require('../database.js');
 
 console.log('|-----------------------------------|')
 console.log('          Logging In...             ')
@@ -16,9 +16,19 @@ module.exports = {
         client.user.setPresence({
             status: "online",
             activity: {
-                name: `the server. Run !help to see my commands.`,
+                name: `the server. Run test.help to see my commands.`,
                 type: "LISTENING"
             }
+        });
+
+        //prefixes
+        client.guilds.cache.forEach(guild => {
+            connection.query(
+                `SELECT prefix FROM Guilds WHERE guildId = ?;`,
+                [guild.id]
+            ).then(result => {
+                client.guildCommandPrefixes.set(guild.id, result[0][0].prefix);
+            }).catch(err => console.log(err));
         });
     }
 }

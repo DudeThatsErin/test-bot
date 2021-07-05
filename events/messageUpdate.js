@@ -1,6 +1,6 @@
-const config = require('./config.json');
+const config = require('../config.json');
 const GhostPing = require('discord.js-ghost-ping');
-const connection = require('./database.js');
+const connection = require('../database.js');
 
 module.exports = {
     name: 'messageUpdate',

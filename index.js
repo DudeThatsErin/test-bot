@@ -2,12 +2,8 @@
 	ERIN'S TESTING BOT
 	RUNNING DJS 12.5.3
 
-	CURRENT ISSUE:
-		NO ISSUE
-	
-	CURRENTLY ADDING:
-		eventFiles
-		new command handler
+	READ THIS LINK FOR ISSUES/ADDITIONS:
+	https://github.com/DudeThatsErin/test-bot
 */
 const fs = require('fs');
 const Discord = require('discord.js');
@@ -15,20 +11,49 @@ const client = new Discord.Client();
 
 // configurations
 const config = require('./config.json');
+client.guildCommandPrefixes = new Discord.Collection();
 
 // commands
-console.log('|-----------------------------------|')
-console.log('     Loading Command Files...        ')
-console.log('|-----------------------------------|')
+console.log('|-----------------------------------|');
+console.log('     Loading Command Files...        ');
+console.log('|-----------------------------------|');
 client.commands = new Discord.Collection();
-const categories = fs.readdirSync(`${__dirname}/commands/`);
-for (const category of categories) {
-	const commandFiles = fs.readdirSync(`${__dirname}/commands/${category}`).filter(File => File.endsWith('.js'));
-	for (const file of commandFiles) {
-		const command = require(`${__dirname}/commands/${category}/${file}`);
-		client.commands.set(command.name, command);
-	}
+client.cooldowns = new Discord.Collection();
+const { cooldowns } = client;
+let connection;
+
+function readFilesFromPath(pathString) {
+	const directoryEntries = fs.readdirSync(pathString, { withFileTypes: true });
+
+	return directoryEntries.reduce((filteredEntries, dirEnt) => {
+		if (dirEnt.isDirectory()) {
+			// If the entry is a directory, call this function again
+			// but now add the directory name to the path string.
+			filteredEntries.push(...readFilesFromPath(`${pathString}/${dirEnt.name}`))
+		} else if (dirEnt.isFile()) {
+			// Check if the entry is a file instead. And if so, check
+			// if the file name ends with `.js`.
+			if (dirEnt.name.endsWith('.js')) {
+				// Add the file to the command file array.
+				filteredEntries.push(`${pathString}/${dirEnt.name}`);
+			}
+		}
+
+		return filteredEntries;
+	}, []);
 }
+
+// Call the read files function with the root folder of the commands and
+// store all the file paths in the constant.
+const commandFilePaths = readFilesFromPath('./commands');
+
+// Loop over the array of file paths and set the command on the client.
+commandFilePaths.forEach((filePath) => {
+	const command = require(filePath);
+
+	client.commands.set(command.name, command);
+	console.log(command.name + ' loaded successfully!');
+});
 
 
 // events
@@ -44,4 +69,7 @@ for (const file of eventFiles) {
 }
 
 // end of file
-client.login(config.client.token);
+(async () => {
+	connection = await require('./database.js');
+	await client.login(config.client.token);
+})();

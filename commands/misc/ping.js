@@ -5,8 +5,9 @@ module.exports = {
   usage: 's.ping',
   inHelp: 'yes',
   example: 's.ping or s.beep',
-  userPerms: ['VIEW_CHANNEL', 'SEND_MESSAGES', 'READ_MESSAGE_HISTORY', 'ADD_REACTIONS', 'EMBED_LINKS'],
-  botPerms: ['VIEW_CHANNEL', 'SEND_MESSAGES', 'READ_MESSAGE_HISTORY', 'ADD_REACTIONS', 'EMBED_LINKS'],
+  cooldown: 0,
+  userPerms: ['SEND_MESSAGES'],
+  botPerms: ['SEND_MESSAGES'],
   execute(message, args) {
     let days = Math.floor(message.client.uptime / 86400000);
     let hours = Math.floor(message.client.uptime / 3600000) % 24;

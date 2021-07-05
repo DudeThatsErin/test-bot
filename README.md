@@ -1,10 +1,11 @@
 # test-bot
 This is the bot that I test everything on.
 # Current Issues
- - Need to fix the permissions system so that it works per-command and gives an error if the user does not have the perms or the bot doesn't have the perms.
+ - ~~Need to fix the permissions system so that it works per-command and gives an error if the user does not have the perms or the bot doesn't have the perms.~~ Fixed. Just gotta move over to Sakura Moon.
 # Currently Adding...
 Audit Logs
- - ~~on/off~~ added to DB
+ - Add the list to the database for the events we can enable/disable.
+ - decide: Separate command for each event for on/off and then another for all or 1 command that uses args and idenfies messages from the args.
  - logging everything (memberAdd, memberDelete, banAdd, banDelete, etc.) in the events folder.
  - invite logs, join logs, etc.
     - code for this was shared with me. Just need to include an on/off for that like below.

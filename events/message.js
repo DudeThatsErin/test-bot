@@ -10,7 +10,7 @@ module.exports = {
         const { cooldowns } = client;
         //get prefix
         const prefix = client.guildCommandPrefixes.get(message.guild.id);
-        //console.log('prefix - ' + prefix)
+        //console.log('My prefix is...' + prefix)
         if (message.author.bot) return;
         /* -----------------------------------------
         THANKS
@@ -340,7 +340,7 @@ module.exports = {
                         value: `\`${error.stack}\``
                     }, {
                         name: '**Ways to Report:**',
-                        value: '[Join My Support Server](https://discord.gg/tT3VEW8AYF), [Fill out this form](https://codinghelp.site/contact-us/) (Erin owns CodingHelp so that form goes directly to her), Message her on Discord, or Email her at me@dudethatserin.site\n\nPlease include all of the information in this embed (message) as well as any additional information you can think to provide. Screenshots are also VERY helpful. Thank you!'
+                        value: 'Run the \`r.report\` command, [Join My Support Server](https://discord.gg/tT3VEW8AYF), [Fill out this form](https://codinghelp.site/contact-us/) (Erin owns CodingHelp so that form goes directly to her), Message her on Discord, or Email her at me@dudethatserin.site\n\nPlease include all of the information in this embed (message) as well as any additional information you can think to provide. Screenshots are also VERY helpful. Thank you!'
                     })
                     .setTimestamp()
                     .setFooter(`Thanks for using ${client.user.tag}! I'm sorry you encountered this error!`, `${client.user.displayAvatarURL()}`)

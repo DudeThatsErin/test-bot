@@ -1,32 +1,24 @@
 const Discord = require('discord.js');
-const connection = require('../../database.js');
+const connection = require('/root/codinghelp-bot/database.js');
 
 
 module.exports = {
     name: 'add-points',
     description: 'This allows **mods** to automatically add points to a participant\'s challenge to the Challenges database.',
     aliases: ['addpnts', 'pluspnts', 'addpoints', 'apnts', 'pluspoints'],
-    usage: 's.add-points <message ID> <number of points>',
+    usage: '++add-points <message ID> <number of points>',
     inHelp: 'yes',
-    example: 's.add-points 850726247050903562 3',
-    permissions: ['ADMINISTRATOR', 'MANAGE_CHANNELS', 'MANAGE_ROLES', 'MANAGE_MESSAGES', 'KICK_MEMBERS', 'BAN_MEMBERS'],
-    note: 'In order for mods to use this command, someone from the Guild needs to support Sakura Moon on [Patreon](https://www.patreon.com/SakuraMoon) and they need to have one of the following permissions:\`ADMINISTRATOR, MANAGE_CHANNELS, MANAGE_ROLES, MANAGE_MESSAGES, KICK_MEMBERS, BAN_MEMBERS\`.',
+    example: '++add-points 850726247050903562 3',
+    challengeMods: 'yes',
+    modOnly: 'yes',
+    userPerms: [''],
+    botPerms: [''],
     async execute (message, args) {
-
-      const results = await connection.query(
-        `SELECT * from Patrons WHERE guildId = ?;`,
-        [message.guild.id]
-    );
-      if(results[0][0] === undefined || results[0][0] === 'undefined') return message.reply('Only patrons have access to use the Challenge System. If you would like to become a patron, check here on Patreon: https://www.patreon.com/SakuraMoon');        let role = message.member.roles.cache.has('839863262026924083') || !message.member.roles.cache.has('718253309101867008');
-        if(!role){ 
-            message.channel.send('You do not have permission to run this command. Only moderators can run this command!');
-            return;
-        } else {
             let msgId = args[0];
             let author = message.author.username;
             let name = message.author.id;
             let points = args[1];
-            const results = await (await connection).query(
+            const results = await connection.query(
                 `SELECT * FROM Submissions WHERE msgId = ?;`,
                 [msgId]
             );
@@ -51,8 +43,7 @@ module.exports = {
                     );
                     message.channel.send(embed);          
 
-            }
-        }    
+            }  
 
     }
 }

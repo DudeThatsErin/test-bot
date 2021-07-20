@@ -18,7 +18,7 @@ module.exports = {
             [guil]
         );
         const item = results[0][0];
-        console.log(item.guildMemberAdd)
+        console.log(item.guildMemberAdd == 0)
 
         let optionsEmbed = new MessageEmbed()
             .setColor('#ffffff')

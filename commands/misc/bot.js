@@ -3,10 +3,10 @@ const Discord = require('discord.js');
 module.exports = {
     name: 'bot',
     description: 'This displays all of the information for Sakura Moon.',
-    aliases: ['client', 'sakuramoon', 'sakura', 'moon', 'sakura-moon', 'sm'],
-    usage: 's.bot',
+    aliases: ['client', 'codinghelp', 'codingh', 'ch'],
+    usage: '++bot',
     inHelp: 'yes',
-    example: 's.bot or s.sakuramoon',
+    example: '++bot or ++codinghelp',
     execute(message, args) {
         console.log('test')
         let days = Math.floor(message.client.uptime / 86400000);
@@ -27,6 +27,6 @@ module.exports = {
         )
         .setFooter('©️ 2021 Sakura Moon - Erin Skidds - DudeThatsErin#8061');
 
-        message.channel.send(embed);
+        message.channel.send({ embeds: [embed] });
     }
 }

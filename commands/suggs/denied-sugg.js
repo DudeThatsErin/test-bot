@@ -78,7 +78,7 @@ module.exports = {
             )
             .setTimestamp()
             .setFooter('If you don\'t understand this reason, please contact the moderator that updated your suggestion. Thank you!');
-            message.client.users.cache.get(`${OGauthor}`).send(denied);
+            message.client.users.cache.get(`${OGauthor}`).send({ embeds: [denied] });
             message.channel.send(`I have denied the suggestion you told me to, <@${moder}>. I also sent a message to <@${OGauthor}> about this denial and the reason as well as deleted the message in the Suggestions channel.`)
                 message.delete();
                 try {

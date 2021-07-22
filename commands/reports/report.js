@@ -19,9 +19,7 @@ module.exports = {
         if (!description && !message.attachments.first()) return message.reply('Please tell me what you would like to report. You can upload a file but please use words as well. A file alone does not tell me very much at all.')
         const channel = client.channels.cache.find(channel => channel.id === config.bot.reportsChId);
         let authorUsername = message.author.username;
-        let avatar = message.author.displayAvatarURL({
-            dynamic: true
-        });
+        let avatar = message.author.displayAvatarURL({dynamic: true});
 
         const url = 'no' || message.attachments.first().url;
 
@@ -34,7 +32,7 @@ module.exports = {
             .setTimestamp()
             .setFooter('This was all of the information I could grab from the report.', config.bot.avatar)
 
-        const msg = await channel.send(report2);
+        const msg = await channel.send({ embeds: [report2] });
 
         message.react('✅');
         const reportNo = msg.id;
@@ -46,6 +44,6 @@ module.exports = {
             [reportNo, author, avatar, description, url]
         );
 
-        usr.send(`I have sent your report to ${config.bot.devName}! Thank you!`, report2)
+        usr.send({ content: `I have sent your report to ${config.bot.devName}! Thank you!`, embeds: [report2] })
     }
 }

@@ -1,5 +1,5 @@
 const Discord = require('discord.js');
-const connection = require('/root/codinghelp-bot/database.js');
+const connection = require('../../database.js');
 
 
 module.exports = {
@@ -29,17 +29,17 @@ module.exports = {
 
         if (!msgId) {
             message.delete();
-            message.reply('You need to include your original message ID. If you do not know what this is, reach out to one of our mods, they can provide this to you.');
+            message.channel.send('You need to include your original message ID. If you do not know what this is, reach out to one of our mods, they can provide this to you.');
             return;
         } else {
             if (a !== athor) {
                 message.delete();
-                message.reply('You are not the original author/poster of the submission. Only the original author/poster (aka OP) can edit their message. If you are receiving this message in error, please report this.');
+                message.channel.send(`${author}, You are not the original author/poster of the submission. Only the original author/poster (aka OP) can edit their message. If you are receiving this message in error, please report this.`);
                 return;
             }
             if (reviewed !== '0') {
                 message.delete();
-                message.reply('Your submission has already been reviewed. I am unable to modify a submission after it has been reviewed by moderators. If this is wrong, please report this. Thanks!');
+                message.channel.send(`${author}, Your submission has already been reviewed. I am unable to modify a submission after it has been reviewed by moderators. If this is wrong, please report this. Thanks!`);
                 return;
             } else {
                 message.attachments.forEach(async attachment => {
@@ -58,7 +58,7 @@ module.exports = {
                         .setDescription(`I have updated your submission to:\n${newAnswer}\n\nYour new message ID is:\n\`${msg}\``)
                         .setFooter('If there is a problem with this, please report it!');
 
-                    message.client.users.cache.get(`${au}`).send(embed);
+                    message.client.users.cache.get(`${au}`).send({ embeds: [embed] });
                     message.delete();
                 });
             }

@@ -20,20 +20,20 @@ module.exports = {
             .setFooter(`Requested by ${message.author.username}`, `${message.author.displayAvatarURL({ format: 'png', dynamic: true })}`);
 
         if (!message.mentions.users.size) {
-            return message.channel.send(myEmbed);
+            return message.channel.send({ embeds: [myEmbed] });
         }
         
         let theirEmbed = new Discord.MessageEmbed()
-        .setColor('#66ADA2')
-        .setTitle(`These are the avatar's you wanted to see.`)
-        .setTimestamp()
-        .setFooter(`Requested by ${message.author.username}`, `${message.author.displayAvatarURL({format: 'png', dynamic: true})}`);
+            .setColor('#66ADA2')
+            .setTitle(`These are the avatar's you wanted to see.`)
+            .setTimestamp()
+            .setFooter(`Requested by ${message.author.username}`, `${message.author.displayAvatarURL({format: 'png', dynamic: true})}`);
 
         const avatarList = message.mentions.users.map(user => {
-            return theirEmbed.addField(`${user.username}'s avatar:`, `${user.displayAvatarURL({ format: 'png', dynamic: true })}`)
+            theirEmbed.addField(`${user.username}'s avatar:`, `${user.displayAvatarURL({ format: 'png', dynamic: true })}`)
         });
 
-        message.channel.send(theirEmbed);
+        message.channel.send({ embeds: [theirEmbed] });
     }
 
 };

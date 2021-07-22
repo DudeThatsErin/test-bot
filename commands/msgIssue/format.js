@@ -12,10 +12,10 @@ module.exports = {
 	botPerms: [''],
 	execute(message, args) {
 		const user = message.mentions.users.first() || message.guild.members.cache.get(args[0]);
-		if(!user) {
-		  message.channel.send('You need to specificy a user via mention or the ID.');
-		  message.delete();
-		  return;
+		if (!user) {
+			message.react('❌')
+			message.channel.send('You need to specificy a user via mention or the ID.');;
+			return;
 		}
 		else { let usr = message.mentions.members.first();
             const formatEmbed = new Discord.MessageEmbed()
@@ -29,7 +29,7 @@ module.exports = {
                 { name: 'Why do I have to format my code?', value: 'You need to format it because it is easy to read regardless of what device you are using to view Discord. So, to make it easier for all our members to be able to help you, we ask that you format your code as shown above.' }
             )
 		  
-			usr.send(`Hey, ${usr}!`, formatEmbed);
+			usr.send({ content: `Hey, ${usr}!`, embeds: [formatEmbed] });
 		}
 		message.channel.bulkDelete(1);
 		message.channel.send(`📨 Hey, ${user} I just sent you a DM about formatting your code! Please check it!`);

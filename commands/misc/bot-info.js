@@ -8,6 +8,7 @@ module.exports = {
     description: 'This gives you all the information you could need about the r/CodingHelp bot.',
     userPerms: [''],
     botPerms: [''],
+    inHelp: 'yes',
     execute(message, args, client) {
 
 
@@ -24,11 +25,11 @@ module.exports = {
                 { name: 'Repository:', value: config.bot.github },
                 { name: 'Developer\'s name & ID:', value: `${config.bot.devName} \`${config.bot.devId}\`` },
                 { name: 'Prefix:', value: config.bot.prefix },
-                { name: 'Current Nickname:', value: message.guild.members.cache.get(config.bot.id).displayName },
+                //{ name: 'Current Nickname:', value: client.user.displayName },
                 { name: 'Current Status:', value: client.user.presence.status }
             )
             .setTimestamp()
             .setFooter('Thanks for your interest!', config.bot.avatar);
-        message.channel.send(embed);
+        message.reply({ embeds: [embed] });
     }
 }

@@ -64,7 +64,7 @@ module.exports = {
             )
             .setTimestamp()
             .setFooter('If you do\'t understand this reason, please contact the moderator that updated your suggestion. Thank you!');
-            message.author.send(edited);
+        message.author.send({ embeds: [edited] });
             message.delete()
 
         const editedTwo = new Discord.MessageEmbed()
@@ -75,7 +75,7 @@ module.exports = {
 
             const channel = message.guild.channels.cache.find(c => c.name === 'suggestions');
             channel.messages.fetch(mId).then(message => {
-                    if(message) message.edit(editedTwo);
+                if (message) message.edit({ embeds: [editedTwo] });
                 }
             )
 

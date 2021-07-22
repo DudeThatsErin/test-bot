@@ -1,5 +1,5 @@
 const Discord = require('discord.js');
-const connection = require('/root/codinghelp-bot/database.js');
+const connection = require('../../database.js');
 
 
 module.exports = {
@@ -43,9 +43,9 @@ module.exports = {
                 .setFooter('If there is a problem with this, please report this!');
 
             if(moderator === '0') {
-                message.client.users.cache.get(`${name}`).send(notDefined);
+                message.client.users.cache.get(`${name}`).send({ embeds: [notDefined] });
             } else {
-                message.client.users.cache.get(`${name}`).send(defined);
+                message.client.users.cache.get(`${name}`).send({ embeds: [defined] });
             }
         }
     }

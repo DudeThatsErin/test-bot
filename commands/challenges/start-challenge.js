@@ -1,5 +1,5 @@
 const Discord = require('discord.js');
-const connection = require('/root/codinghelp-bot/database.js');
+const connection = require('../../database.js');
 
 
 module.exports = {
@@ -44,7 +44,7 @@ module.exports = {
                                     {name: 'Prizes', value: `🥇 First Place: ${prizes[0]}\n🥈 Second Place: ${prizes[1]}\n🥉 Third Place: ${prizes[2]}`}
                                 )
                                 .setFooter('Thanks for participating in our challenge! Good luck!');
-                        message.guild.channels.cache.get(announcementsChannel).send(rules);
+                    message.guild.channels.cache.get(announcementsChannel).send({ embeds: [rules] });
                         
                         const msg = message.id;
                             connection.query(
@@ -52,7 +52,7 @@ module.exports = {
                                 [guild, msg, announcementsChannel, mod, prizes[0], prizes[1], prizes[2]]
                             );
                       
-                        message.reply(`Thanks for that! I have sent the messages to the channel! Check it out! <#${announcementsChannel}>`)
+                    message.react('👍');
                 }
             }
         

@@ -1,5 +1,5 @@
 const Discord = require('discord.js');
-const connection = require('/root/codinghelp-bot/database.js');
+const connection = require('../../database.js');
 
 
 module.exports = {
@@ -12,26 +12,25 @@ module.exports = {
     userPerms: [''],
     botPerms: [''],
     modOnly: 'yes',
+    challengeMods: 'yes',
     async execute (message, args) {
-        let role = message.member.roles.cache.has('839863262026924083') || message.member.roles.cache.has('718253309101867008') || message.member.roles.cache.has('846074806788685836');
-        if(!role){ 
-            message.channel.send('You don\'t have the `Challenge Mods` role so you can\'t use this command.');
-            return;
-        } else {
                 let challengeNo = args[0];
                 let points = args[1];
                 let msgId = args[2];
                 let moderator = message.author.id;
 
-                if(!challengeNo) {
+            if (!challengeNo) {
+                message.react('❌');
                     message.channel.send('You need to tell me what challenge number you would like to review.');
                     return;
                 } else {
-                    if(!points) {
+                    if (!points) {
+                        message.react('❓');
                         message.channel.send('You need to tell me how many points to give the original author of this submission.');
                         return;
                     } else {
-                        if(!msgId) {
+                        if (!msgId) {
+                            message.react('❓');
                             message.channel.send('You need to include the message ID for the submission you would like to review. Without this I will not know which message to review.');
                             return;
                         } else {
@@ -50,11 +49,10 @@ module.exports = {
                                 [points, moderator, msgId]
                             );
 
-                            message.channel.send(`I have given ${Author} ${points} point(s) and marked that submission as reviewed! Thank you!`);
+                            message.react('👍');
                         }
                     }
                 }
-        }    
 
     }
 }

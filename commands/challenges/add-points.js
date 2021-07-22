@@ -1,5 +1,5 @@
 const Discord = require('discord.js');
-const connection = require('/root/codinghelp-bot/database.js');
+const connection = require('../../database.js');
 
 
 module.exports = {
@@ -26,7 +26,8 @@ module.exports = {
             let playerID = await message.client.users.fetch(player).catch(err => {console.log(err);});
             let playerName = playerID.username;
 
-            if(!msgId){ 
+        if (!msgId) {
+                message.react('❌')
                 message.channel.send('You need to include the submission\'s message ID of the submission you want to add points to.');
                 return;
             } else {
@@ -41,7 +42,7 @@ module.exports = {
                         `UPDATE Submissions SET moderator = ?, points = points + ? WHERE msgId = ?;`,
                         [name, points, msgId]
                     );
-                    message.channel.send(embed);          
+                message.channel.send({ embeds: [embed] });
 
             }  
 

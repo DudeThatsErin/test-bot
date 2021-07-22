@@ -1,5 +1,5 @@
 const Discord = require('discord.js');
-const connection = require('/root/codinghelp-bot/database.js');
+const connection = require('../../database.js');
 
 
 module.exports = {
@@ -19,7 +19,8 @@ module.exports = {
         let author = message.author.username;
         let name = message.author.id;
 
-        if(!msgId){ 
+        if (!msgId) {
+            message.react('❌');
             message.channel.send('You need to include the submission\'s message ID of the submission you want to remove points from.');
             return;
         } else {
@@ -34,7 +35,7 @@ module.exports = {
                     `UPDATE Submissions SET mod = ? AND points = ? WHERE msgId = ?;`,
                     [NULL, NULL, msgId]
                 );
-                message.client.users.cache.get(`${name}`).send(embed);
+                message.client.users.cache.get(`${name}`).send({ embeds: [embed] });
                 message.channel.send('📨 I have sent you a private message.')
             
         }

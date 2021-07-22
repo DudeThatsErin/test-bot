@@ -13,9 +13,9 @@ module.exports = {
     execute(message, args) {   
         
         const user = message.mentions.users.first() || message.guild.members.cache.get(args[0]);
-      if(!user) {
-        message.channel.send('You need to specificy a user via mention or the ID.');
-        message.delete();
+      if (!user) {
+        message.react('❌')
+        message.channel.send('You need to specificy a user via mention or the ID.');;
         return;
       }
       else { 
@@ -35,11 +35,11 @@ module.exports = {
             .setTimestamp();
             
             message.react('📨')
-            user.send(channels);
+        user.send({ embeds: [channels] });
             }
             message.channel.send(`📨 Hey, ${user} I just sent you a DM with our channel listing! Please check it!`).catch(async err => {
 				message.channel.send(`Hey ${user}, it looks like you have your DMs closed. So I am displaying the command here.`);
-				message.channel.send(helpEmbed1);
+              message.channel.send({ embeds: [helpEmbed1] });
 			});
       /*message.channel.send(channels);*/
     },

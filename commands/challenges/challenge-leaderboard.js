@@ -56,7 +56,7 @@ module.exports = {
             )
             .setFooter('If there is an error here, please report this!');
 
-    message.channel.send(embed2);
+            message.channel.send({ embeds: [embed2] });
 
          } else {
             const ponts = await connection.query(
@@ -74,7 +74,7 @@ module.exports = {
                 )
                 .setFooter('If there is an error here, please report this!');
 
-        message.channel.send(embed2);
+            message.channel.send({ embeds: [embed2] });
                 }
     }
 }

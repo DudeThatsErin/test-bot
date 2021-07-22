@@ -1,5 +1,5 @@
 const Discord = require('discord.js');
-const connection = require('/root/codinghelp-bot/database.js');
+const connection = require('../../database.js');
 
 module.exports = {
     name: 'submit',
@@ -25,6 +25,7 @@ module.exports = {
             [guildId]
         );
         if (result == undefined) {
+            message.react('❌');
             message.reply('You already made a submission to this challenge. You may not submit more than one answer per challenge question. If you need to modify your submission, please use the \`++edit-submission [challenge number] [new answer]\` command. Thank you!');
             return;
         } else {
@@ -33,6 +34,7 @@ module.exports = {
             let tag = message.author.username;
 
             if (!dayNo) {
+                message.react('❌');
                 message.reply('Please include the challenge number you are submitting your answer to.');
                 return;
             } else {
@@ -48,7 +50,7 @@ module.exports = {
                         .setDescription(`The answer you submitted was:\n${answer}\n\nIf you want to modify your answer, please copy and paste this command with your updated answer: \`++modify-answer ${msgId} [replace this with your new answer]\``)
                         .setFooter(`If you need to modify your answer please run the ++modify-answer command. Thank you!`);
                     message.delete();
-                    message.client.users.cache.get(`${author}`).send(embed);
+                    message.client.users.cache.get(`${author}`).send({ embeds: [embed] });
                 }
                 message.attachments.forEach(async attachment => {
                     const url = attachment.url;
@@ -63,7 +65,7 @@ module.exports = {
                         .setDescription(`The answer you submitted was:\n${answer}\n\nThis is the attachment you submitted: ${url}\n\nIf you want to modify your answer, please copy and paste this command with your updated answer: \`++modify-answer ${msgId} [replace this with your new answer]\``)
                         .setFooter(`If you need to modify your answer please run the ++modify-answer command. Thank you!`);
                     message.delete();
-                    message.client.users.cache.get(`${author}`).send(embed);
+                    message.client.users.cache.get(`${author}`).send({ embeds: [embed] });
                 });
 
 

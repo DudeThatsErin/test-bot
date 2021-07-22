@@ -94,13 +94,13 @@ module.exports = {
                 .setTimestamp()
                 .setFooter('If you don\'t understand this status, please contact the moderator that updated your suggestion. Thank you!');
 
-            (await message.client.users.cache.get(`${OGauthor}`)).send(updated);
+                (await message.client.users.cache.get(`${OGauthor}`)).send({ embeds: [updated] });
             message.channel.send(`Thanks for providing that status <@${moder}>! I have updated the suggestion that <@${OGauthor}> suggested in the Suggestions channel as well as sent <@${OGauthor}> a DM providing them the updates. I hope that is everything I can do for you!`);
             message.delete();
 
             const chnnel = await message.guild.channels.cache.find(c => c.name === 'suggestions');
             chnnel.messages.fetch(msgId).then(message => {
-                    if(message) message.edit(inprogress);
+                if (message) message.edit({ embeds: [inprogress] });
                     if(message) message.reactions.removeAll().catch(error => console.error('Failed to clear reactions: ', error));
                 }
             ).catch(console.error);

@@ -1,5 +1,5 @@
 const Discord = require('discord.js');
-const connection = require('/root/codinghelp-bot/database.js');
+const connection = require('../../database.js');
 
 module.exports = {
     name: 'remove-user',
@@ -26,12 +26,11 @@ module.exports = {
                         .setTitle(`User I have removed from the database`)
                         .setDescription(`${tag}`)
                         .setFooter('If this is wrong, please report this.');
-                    message.channel.send(embed);
+                message.channel.send({ embeds: [embed] });
                    connection.query(
                         `DELETE FROM Challenges WHERE guildId = ? AND player = ?;`,
                         [message.guild.id, id]
                     );
-                    console.log('successfully added users in embed to the database!');
                 } 
 
     }

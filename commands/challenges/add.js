@@ -1,5 +1,5 @@
 const Discord = require('discord.js');
-const connection = require('/root/codinghelp-bot/database.js');
+const connection = require('../../database.js');
 
 
 module.exports = {
@@ -25,12 +25,11 @@ module.exports = {
                         .setTitle(`User I have added to the database`)
                         .setDescription(`${tag}`)
                         .setFooter('Only users that have been online at least once since this bot was last rebooted will be shown here. Other users can be added using the add-participants command.');
-                    message.channel.send(embed);
+                message.channel.send({ embeds: [embed] });
                    connection.query(
                         `INSERT INTO Challenges (guildId, player) VALUES (?, ?);`,
                         [message.guild.id, tag]
                     );
-                    console.log('successfully added users in embed to the database!');
                 } 
 
     }

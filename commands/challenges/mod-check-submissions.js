@@ -1,5 +1,5 @@
 const Discord = require('discord.js');
-const connection = require('/root/codinghelp-bot/database.js');
+const connection = require('../../database.js');
 
 
 module.exports = {
@@ -17,7 +17,8 @@ module.exports = {
         let name = message.author.id;
         let challengeNo = args[0];
 
-            if(!challengeNo) {
+        if (!challengeNo) {
+            message.react('❓');
                 message.channel.send('Please include the challenge number you want to check the submissions for. Thank you!');
                 return;
             } else {
@@ -33,7 +34,7 @@ module.exports = {
                     .setDescription(`${question}`)
                     .setFooter('If this is not right, please report it!');
                     message.channel.send(`📨 I have sent you a private message!`)
-                    message.client.users.cache.get(`${name}`).send(embed);
+                message.client.users.cache.get(`${name}`).send({ embeds: [embed] });
 
                 const result = await connection.query(
                     `SELECT * FROM Submissions WHERE guildId = ? AND challengeNo = ?;`,
@@ -67,9 +68,9 @@ module.exports = {
                         .setFooter('If there is a problem with this, please report this!');
 
                     if(moderator === '0') {
-                        message.client.users.cache.get(`${name}`).send(notDefined);
+                        message.client.users.cache.get(`${name}`).send({ embeds: [noDefined] });
                     } else {
-                        message.client.users.cache.get(`${name}`).send(defined);
+                        message.client.users.cache.get(`${name}`).send({ embeds: [defined] });
                     }
                   }
                 }

@@ -1,5 +1,5 @@
 const Discord = require('discord.js');
-const connection = require('/root/codinghelp-bot/database.js');
+const connection = require('../../database.js');
 
 module.exports = {
     name: 'remove-submissions',
@@ -16,12 +16,9 @@ module.exports = {
         let name = message.author.id;
         const modname = await message.client.users.fetch(name).catch(err => {console.log(err);});
         let submission = args[0];
-        let role = message.member.roles.cache.has('839863262026924083') || message.member.roles.cache.has('718253309101867008') || message.member.roles.cache.has('846074806788685836');
-        if(!role){ 
-            message.channel.send('You don\'t have the `Challenge Mods` role so you can\'t use this command.');
-            return;
-        } else {
-            if(!submission) {
+
+        if (!submission) {
+            message.react('❌');
                 message.channel.send('Please include the message ID of the submission you want to remove. Thank you!');
                 return;
             } else {
@@ -41,13 +38,12 @@ module.exports = {
                         .setDescription(`Their submission is as follows:\n${Submissions}\n\nThe moderator that removed it was: ${modname}.`)
                         .setFooter('If there is a problem with this, please report this!');
 
-                        message.channel.send(embed);
+                message.channel.send({ embeds: [embed] });
 
                         await connection.query(
                             `DELETE FROM Submissions WHERE msgId = ? AND guildId = ?;`,
                             [submission, message.guild.id]
                         );
-                }
                 }
                 }
 }

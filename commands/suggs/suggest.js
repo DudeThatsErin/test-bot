@@ -25,6 +25,7 @@ module.exports = {
         if (args.length > 0) {
             messageArgs = args.join(' ');
         } else {
+            message.react('❓');
             message.reply('You need to specify a suggestion to use this command. How will we know what you want to suggest unless you tell us?! If you would like to check the status of your suggestion then you can use \`++statussug [your status message ID]\`.');
             return;
         }
@@ -61,6 +62,7 @@ module.exports = {
         if (args.length > 0) {
             messageArgs = args.join(' ');
         } else {
+            message.react('❓');
             message.reply('You need to specify a suggestion to use this command. How will we know what you want to suggest unless you tell us?! If you would like to check the status of your suggestion then you can use \`++statussug [your status message ID]\`.');
             return;
         }
@@ -77,7 +79,7 @@ module.exports = {
     
         message.client.users.cache.get(`${author}`).send(`Hey, ${message.author.username}! Thanks for submitting a suggestion! Our server needs to have time to vote on this. Once some time has passed, you can check the suggestion channel to check the updated status of your suggestion! We appreciate your feedback! Happy chatting!`);
     
-        const msg = await channel.send(initial);
+        const msg = await channel.send({ embeds: [initial] });
             msg.react('👍');
             msg.react('👎');
             message.delete();

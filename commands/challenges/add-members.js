@@ -1,5 +1,5 @@
 const Discord = require('discord.js');
-const connection = require('/root/codinghelp-bot/database.js');
+const connection = require('../../database.js');
 
 
 module.exports = {
@@ -36,7 +36,7 @@ module.exports = {
                     .setTitle(`Users with the \`Participants\` role`)
                     .setDescription(`${name}`)
                     .setFooter('Only users that have been online at least once since this bot was last rebooted will be shown here and only a maximum of 2,000 members will appear. Other users can be added using the s.manualadd command.');
-                message.channel.send(embed);               
+                message.channel.send({ embeds: [embed] });
 
             }  
 

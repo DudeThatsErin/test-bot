@@ -9,10 +9,10 @@ module.exports = {
 	botPerms: [''],
     execute(message, args) {
   		const user = message.mentions.users.first() || message.guild.members.cache.get(args[0]);
-		if(!user) {
-		  message.channel.send('You need to specificy a user via mention or the ID.');
-		  message.delete();
-		  return;
+		if (!user) {
+			message.react('❌')
+			message.channel.send('You need to specificy a user via mention or the ID.');;
+			return;
 		}
 		else { 
 		  let usr = message.mentions.members.first();

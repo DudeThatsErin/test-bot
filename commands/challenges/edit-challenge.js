@@ -1,5 +1,5 @@
 const Discord = require('discord.js');
-const connection = require('/root/codinghelp-bot/database.js');
+const connection = require('../../database.js');
 
 
 module.exports = {
@@ -24,11 +24,6 @@ module.exports = {
             const ch = result[0][0].channelD;
             const channel = message.guild.channels.cache.find(c => c.id === `${ch}`);
 
-
-            channel.messages.fetch(msgId).then(message => {
-                if(message) message.edit(embed);
-            });
-
             connection.query(
                 `UPDATE Challenge SET title = ? WHERE msgId = ? AND guildId = ?`,
                 [title, msgId, message.guild.id]
@@ -39,9 +34,12 @@ module.exports = {
                 .setTitle(`Challenge ${day}`)
                 .setDescription(`${title}`)
                 .setFooter('Run the ++submit to submit answers to this challenge.');
+        
+        channel.messages.fetch(msgId).then(message => {
+            if (message) message.edit({ embeds: [embed] });
+        });
 
-            message.delete();
-            message.reply('Thanks! I have updated the message you gave me the ID for.');
+            message.react('✅');
 
 
 

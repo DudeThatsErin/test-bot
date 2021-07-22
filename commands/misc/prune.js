@@ -9,6 +9,7 @@ module.exports = {
     inHelp: 'yes',
     userPerms: ['VIEW_CHANNEL', 'SEND_MESSAGES', 'READ_MESSAGE_HISTORY', 'ADD_REACTIONS', 'EMBED_LINKS', 'MANAGE_MESSAGES'],
     botPerms: ['VIEW_CHANNEL', 'SEND_MESSAGES', 'READ_MESSAGE_HISTORY', 'ADD_REACTIONS', 'EMBED_LINKS', 'MANAGE_MESSAGES'],
+    modOnly: 'yes',
     execute(message, args) {
 
         const amount = parseInt(args[0]);

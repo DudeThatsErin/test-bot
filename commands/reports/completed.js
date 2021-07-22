@@ -16,6 +16,7 @@ module.exports = {
 
         let description = args.slice(1).join(' ');
         if (!description) {
+            message.react('❓');
             message.reply('Please include the status Erin, sheesh.')
             return;
         }
@@ -23,8 +24,8 @@ module.exports = {
 
         let messageId = args[0];
         if (messageId < 0) {
-            message.react('❌')
-            message.reply('Please include the message ID for the report you want to mark as completed.')
+            message.react('❌');
+            message.reply('Please include the message ID for the report you want to mark as completed.');
             return;
         } else {
             const results = await (await connection).query(
@@ -48,7 +49,7 @@ module.exports = {
                 if (message) message.delete();
             });
 
-            (await message.client.users.cache.get(`${OG}`)).send(report);
+            (await message.client.users.cache.get(`${OG}`)).send({ embeds: [report] });
 
             await connection.query(
                 `DELETE FROM reports WHERE messageId = ?;`,

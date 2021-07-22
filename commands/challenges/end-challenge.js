@@ -1,5 +1,5 @@
 const Discord = require('discord.js');
-const connection = require('/root/codinghelp-bot/database.js');
+const connection = require('../../database.js');
 
 
 module.exports = {
@@ -30,7 +30,7 @@ module.exports = {
                 [message.guild.id]
             );    
 
-            message.reply('I have deleted everything from the databases and ended the challenge for you!')
+        message.react('✅');
 
     }
 }

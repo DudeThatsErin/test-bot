@@ -4,7 +4,7 @@ module.exports = {
     name: 'bot-status',
     aliases: ['bot-update', 'botstatus', 'botupdate'],
     description: 'Pushes an embed to display in the channel about a certain update.',
-    usage: 's.bot-status Status Message',
+    usage: '++bot-status Status Message',
     note: '',
     permissions: '',
     ownerOnly: 'yes',
@@ -22,7 +22,7 @@ module.exports = {
             .setTimestamp()
             .setFooter('Thanks for using Sakura Moon!');
         message.delete();
-        message.channel.send(`Hey, <@&850979691842109470>,`, embed) // Server Updates 850979569515102238 or Bot Updates 850979691842109470
+        message.channel.send({ content: `Hey, <@&850979691842109470>,`, embeds: [embed] }) // Server Updates 850979569515102238 or Bot Updates 850979691842109470
 
 
 

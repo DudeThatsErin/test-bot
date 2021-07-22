@@ -70,6 +70,6 @@ module.exports = {
             )
             .setTimestamp()
             .setFooter('If anything is wrong, please report this!', `${message.guild.iconURL({ dynamic: true })}`);
-            message.channel.send(serverEmbed);
+        message.channel.send({ embeds: [serverEmbed] });
     }
 }

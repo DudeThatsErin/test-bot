@@ -1,13 +1,13 @@
-# test-bot
-This is the bot that I test everything on.
-# Current Issues
- - ~~Need to fix the permissions system so that it works per-command and gives an error if the user does not have the perms or the bot doesn't have the perms.~~ Fixed. Just gotta move over to Sakura Moon.
-# Currently Adding...
-Audit Logs
- - Add the list to the database for the events we can enable/disable.
- - decide: Separate command for each event for on/off and then another for all or 1 command that uses args and idenfies messages from the args.
- - logging everything (memberAdd, memberDelete, banAdd, banDelete, etc.) in the events folder.
- - invite logs, join logs, etc.
-    - code for this was shared with me. Just need to include an on/off for that like below.
- - ability to turn on/off each type of log for unique per-guild logging.
-    - I just need to update the db for each type of option (I guess a new column for each type 0 for off 1 for on.)
+# r/CodingHelp Discord Bot
+
+[![Discord](https://discordapp.com/api/guilds/258167954913361930/embed.png)](https://codinghelp.site/discord) [![Twitter Follow](https://img.shields.io/twitter/follow/DudeThatsErin.svg?style=social)](https://twitter.com/DudeThatsErin)
+
+This is a bot that I created and decided to make it open-source. I get assistance from my awesome discord server when it comes to updates and fixing bugs.
+
+## Current To Do List
+- Get ++thanks system working (gives 10 points for each thanks and has a leaderboard to show who has the most thanks... shows who is the most helpful)
+- Get ModMail System working. This is a lot more than just one command so it will take a while.
+- Make sure all commands show `++` as the prefix and not `s.` for my Sakura Moon bot.
+
+## Contributions
+I love getting contributions. All you have to do is join the [r/CodingHelp Discord Server](https://codinghelp.site/discord) and you can make suggestions and help contribute to the bots success!

@@ -1,5 +1,5 @@
 const Discord = require('discord.js');
-const connection = require('/root/codinghelp-bot/database.js');
+const connection = require('../../database.js');
 
 
 module.exports = {
@@ -33,11 +33,13 @@ module.exports = {
                     `SELECT * FROM Challenge WHERE guildId = ? ORDER BY challengeNo DESC LIMIT 1;`,
                     [guildId]
                 );
-                const challengeNo = challenge[0][0].challengeNo;
+            const challengeNo = challenge[0][0].challengeNo;
+            message.react('❓');
                 message.reply(`What challenge number are you trying to add to the database? The last challenge number in the database is ${challengeNo}.`);
                 return;
         } else {
-            if(!answer) {
+            if (!answer) {
+                message.react('❓');
                 message.reply('What is the challenge that you want to submit? You can\'t submit a blank challenge.');
                 return;
             } else {
@@ -68,7 +70,7 @@ module.exports = {
                     .setDescription(`The submission is as follows: ${answer} You can see it here: <#${announcementsChannel}>.\n\nThe message ID for the challenge is: \`${mes}\``)
                     .setFooter('If this is in error, please report this!');
 
-            message.channel.send(embed)
+                message.channel.send({ embeds: [embed] })
                 message.delete();
                 }
             }

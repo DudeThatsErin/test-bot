@@ -16,6 +16,7 @@ module.exports = {
     const thanker = message.author.id;
 
     if (!mention) {
+      message.react('❓');
       message.reply('Please tag a user to thank.');
       return;
     }

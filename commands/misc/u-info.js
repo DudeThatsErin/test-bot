@@ -44,7 +44,7 @@ module.exports = {
 
 
 
-        message.channel.send(myInfo);
+        message.channel.send({ embeds: [myInfo] });
         
     }
 

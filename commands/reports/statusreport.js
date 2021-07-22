@@ -14,6 +14,7 @@ module.exports = {
 
         let messageId = args[0];
         if (messageId < 0) {
+            message.react('❓');
             message.reply('Please include the message ID for the report you want to check the status on.');
             return;
         } else {
@@ -28,7 +29,6 @@ module.exports = {
             const original = results[0][0].description;
             const avatar = results[0][0].avatar;
             const file = results[0][0].file || 'No file was uploaded';
-
             const status = results[0][0].stat || 'I have not started working on it yet. I will get to it as soon as I can. Thank you!';
 
             let report = new Discord.MessageEmbed()
@@ -48,7 +48,7 @@ module.exports = {
                 .setFooter('If you don\'t understand this status, please ask Erin about it.', 'https://codinghelp.site/bots/codinghelp.png')
 
             message.react('📨');
-            usr.send(report)
+            usr.send({ embeds: [report] })
         }
 
     }

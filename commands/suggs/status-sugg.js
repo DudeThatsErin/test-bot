@@ -77,7 +77,7 @@ module.exports = {
         .setFooter('This is the current status of this suggestion. If you are curious about this status, please contact the mods to see what we are waiting on.');
 
         let user = message.author;
-        user.send(initial);
+        user.send({ embeds: [initial] });
         message.delete()
         }
     };

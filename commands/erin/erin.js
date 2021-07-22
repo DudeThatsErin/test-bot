@@ -4,10 +4,11 @@ const config = require('../../config.json');
 module.exports = {
     name: 'erin',
     aliases: ['me', 'dev'],
+    description: 'Shows erin how the config.json is set up.',
     usage: 's.erin',
     inHelp: 'yes',
     cooldown: 0,
-    example: 's.erin or s.dev',
+    example: '++erin or ++dev',
     permissions: '',
     ownerOnly: 'yes',
     note: '',
@@ -22,8 +23,8 @@ module.exports = {
                 value: `MYSQL:\n${config.mysql.host}\n${config.mysql.user}\nDB PASSWORD\n${config.mysql.database}\n\nBOT: ${config.bot.prefix}\nTOKEN\n${config.bot.tag}\n${config.bot.name}\nowner ID\`${config.bot.ownerID}\`\n${config.bot.server}\n${config.bot.invite_link}\n${config.bot.avatar}\n${config.bot.release}\n${config.bot.patreon}\n${config.bot.type}\n${config.bot.url}\nsm's server ID: \`${config.bot.server_id}\`\ntest server's ID:\`${config.bot.testserver_id}\`\n\nDEVELOPER:\n${config.developer.name}\n${config.developer.username}\n${config.developer.tag}\nmy id: \`${config.developer.id}\`\n${config.developer.url}`
             })
             .setTimestamp()
-            .setFooter('Run s.help <command> to see what these do and how to use them.');
+            .setFooter('Run ++help <command> to see what these do and how to use them.');
 
-        message.channel.send(embed);
+        message.channel.send({ embeds: [embed] });
     }
 }

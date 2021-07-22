@@ -8,7 +8,7 @@ module.exports = {
     userPerms: [''],
     botPerms: [''],
     execute(message) {
-        message.channel.bulkDelete(1);
+        
         message.channel.send('We aren\'t sure if you knew this, but we have a wiki! It answers a lot of the questions we get asked here! Check it out here: https://codinghelp.site/');
     },
     

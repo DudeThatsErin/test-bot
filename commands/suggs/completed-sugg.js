@@ -88,7 +88,7 @@ module.exports = {
                     .setFooter('If you don\'t understand this decision, please contact the moderator that completed your suggestion. Thank you!');
     
             
-                    (await message.client.users.cache.get(`${OGauthor}`)).send(denied);
+                (await message.client.users.cache.get(`${OGauthor}`)).send({ embeds: [denied] });
                     message.delete();
                     message.channel.send(`I have updated the suggestion for you, <@${moder}>, and sent a message to <@${OGauthor}>. I have also deleted the message with the ID of ${msgId} from the #suggestions channel. I hope this resolves everything for you!`);
 

@@ -5,6 +5,7 @@ const {
 module.exports = {
     name: 'messageto',
     aliases: ['dm', 'message', 'pm'],
+    description: 'allows mods to send a message to a user via DM.',
     note: '',
     userPerms: ['ADMINISTRATOR', 'MANAGE_CHANNELS', 'MANAGE_ROLES', 'MANAGE_MESSAGES', 'KICK_MEMBERS', 'BAN_MEMBERS'],
     botPerms: ['ADMINISTRATOR', 'MANAGE_CHANNELS', 'MANAGE_ROLES', 'MANAGE_MESSAGES', 'KICK_MEMBERS', 'BAN_MEMBERS'],
@@ -44,6 +45,6 @@ module.exports = {
 
         // ultimate send
         message.react("✅");
-        user.send(embed);
+        user.send({ embeds: [embed] });
     }
 }

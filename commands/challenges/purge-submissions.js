@@ -1,4 +1,4 @@
-const connection = require('/root/codinghelp-bot/database.js');
+const connection = require('../../database.js');
 
 
 module.exports = {
@@ -18,7 +18,7 @@ module.exports = {
                 `DELETE FROM Submissions WHERE guildId = ?;`,
                 [message.guild.id]
             );
-            message.reply('I have deleted all of the submissions from the submissions database. If you would like to remove them from the Discord Channel, you can run \`s.purge [number 2-100]\` in that channel.');
+        message.react('✅');
 
 
         

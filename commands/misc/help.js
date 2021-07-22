@@ -1,50 +1,7 @@
 const {	MessageEmbed } = require('discord.js');
 const config = require("../../config.json");
+const paginationEmbed = require('discord.js-pagination');
 
-// define embeds first
-
-const embed1 = new MessageEmbed()
-	.setColor('#6683AD')
-	.setTitle('Help Menu 1 - General Commands')
-	.setDescription('These are all of the commands r/CodingHelp can do. If you want to get more information you can do \`++help <command>\`. Clicking the emojies at the bottom of this message will allow you to go through all of our commands.')
-	.addFields({
-		name: 'These are commands any user can use.',
-		value: '```css\nping\navatar\nuser-info\nserver-info\nbot-info\nrules\nhelp\nerror\nreddit\ntech\nformat\nchannel\nbin\ndocs\nshare-code\nmods\njust-ask\npatience\nthanks\nwiki\nwrong-channel\nreport\nstatusreport\n\n```'
-	});
-
-const embed2 = new MessageEmbed()
-	.setColor('#6683AD')
-	.setTitle('Help Menu 2 - Moderator Only Commands')
-	.setDescription('These are all of the commands r/CodingHelp can do. If you want to get more information you can do \`++help <command>\`. Clicking the emojies at the bottom of this message will allow you to go through all of our commands.')
-	.addFields({
-		name: 'These are general **moderator** only commands. Meaning only **moderators** can use these commands.',
-		value: '```css\nprune\nserver\npartners\ncompletedreport\nbot-status\nserver-status\nsub-status\ndm\n```'
-	});
-
-const embed3 = new MessageEmbed()
-	.setColor('#6683AD')
-	.setTitle('Help Menu 3 - Suggestion System Commands')
-	.setDescription('These are all of the commands r/CodingHelp can do. If you want to get more information you can do \`++help <command>\`. Clicking the emojies at the bottom of this message will allow you to go through all of our commands.')
-	.addFields({
-		name: 'These are commands any user can use for our Suggestions System.',
-		value: '```css\nsuggestions\neditsugg\nstatussug\n```'
-	}, {
-		name: 'These are our **moderator** only commands for our Suggestions System.',
-		value: '```css\nprog-sugg\ndenied-sugg\ncompletedsugg\n```'
-	});
-
-const embed4 = new MessageEmbed()
-	.setColor('#6683AD')
-	.setTitle('Help Menu 4 - Challenge System Commands')
-	.setDescription('These are all of the commands r/CodingHelp can do. If you want to get more information you can do \`++help <command>\`. Clicking the emojies at the bottom of this message will allow you to go through all of our commands.')
-	.addFields({
-		name: 'These are commands any user can use for our Challenge System.',
-		value: '```css\nsubmit\nedit-submission\nchallenge-leaderboard\nuser-check-submissions\n```'
-	}, {
-		name: 'These are our **moderator** only commands for our Challenge System.',
-		value: '```css\nadd-members\nadd-users\ncheck-participants\nremove-participant\nstart-challenge\nchallenge\nedit-challenge\nmods-check-submissions\nreviewed\npurge-submissions\nend-challenge\n```'
-	})
-	.addField("Check out all of our commands!", 'If you visit our [website](https://codinghelp.site/commands/) you can see all of our commands!', false);
 
 // then code
 
@@ -58,11 +15,58 @@ module.exports = {
 	userPerms: [''],
 	botPerms: [''],
 	async execute(message, args) {
-		const helps = [];
-		helps.push(embed1);
-		helps.push(embed2);
-		helps.push(embed3);
-		helps.push(embed4);
+
+		// define embeds first
+
+		const embed1 = new MessageEmbed()
+			.setColor('#6683AD')
+			.setTitle('Help Menu 1 - General Commands')
+			.setDescription('These are all of the commands r/CodingHelp can do. If you want to get more information you can do \`++help <command>\`. Clicking the emojies at the bottom of this message will allow you to go through all of our commands.')
+			.addFields({
+				name: 'These are commands any user can use.',
+				value: '```css\nping\navatar\nuser-info\nserver-info\nrules\nhelp\nerror\nreddit\ntech\nformat\nchannel\nbin\ndocs\nshare-code\nmods\njust-ask\npatience\nthanks\nwiki\nwrong-channel\nreport\nstatusreport\n\n```'
+			});
+
+		const embed2 = new MessageEmbed()
+			.setColor('#6683AD')
+			.setTitle('Help Menu 2 - Moderator Only Commands')
+			.setDescription('These are all of the commands r/CodingHelp can do. If you want to get more information you can do \`++help <command>\`. Clicking the emojies at the bottom of this message will allow you to go through all of our commands.')
+			.addFields({
+				name: 'These are general **moderator** only commands. Meaning only **moderators** can use these commands.',
+				value: '```css\nprune\nserver\npartners\ncompletedreport\nbot-status\nserver-status\nsub-status\ndm\n```'
+			});
+
+		const embed3 = new MessageEmbed()
+			.setColor('#6683AD')
+			.setTitle('Help Menu 3 - Suggestion System Commands')
+			.setDescription('These are all of the commands r/CodingHelp can do. If you want to get more information you can do \`++help <command>\`. Clicking the emojies at the bottom of this message will allow you to go through all of our commands.')
+			.addFields({
+				name: 'These are commands any user can use for our Suggestions System.',
+				value: '```css\nsuggestions\neditsugg\nstatussug\n```'
+			}, {
+				name: 'These are our **moderator** only commands for our Suggestions System.',
+				value: '```css\nprog-sugg\ndenied-sugg\ncompletedsugg\n```'
+			});
+
+		const embed4 = new MessageEmbed()
+			.setColor('#6683AD')
+			.setTitle('Help Menu 4 - Challenge System Commands')
+			.setDescription('These are all of the commands r/CodingHelp can do. If you want to get more information you can do \`++help <command>\`. Clicking the emojies at the bottom of this message will allow you to go through all of our commands.')
+			.addFields({
+				name: 'These are commands any user can use for our Challenge System.',
+				value: '```css\nsubmit\nedit-submission\nchallenge-leaderboard\nuser-check-submissions\n```'
+			}, {
+				name: 'These are our **moderator** only commands for our Challenge System.',
+				value: '```css\nadd-members\nadd-users\ncheck-participants\nremove-participant\nstart-challenge\nchallenge\nedit-challenge\nmods-check-submissions\nreviewed\npurge-submissions\nend-challenge\n```'
+			})
+			.addField("Check out all of our commands!", 'If you visit our [website](https://codinghelp.site/commands/) you can see all of our commands!', false);
+		
+		pages = [
+			embed1,
+			embed2,
+			embed3,
+			embed4
+		];
 
 		let cmdd = args[0];
 
@@ -104,25 +108,10 @@ module.exports = {
 
 			emb.addField("Check out all of our commands!", 'If you visit our [website](https://codinghelp.site/commands/) you can see all of our commands!', false);
 
-			if (message.content.endsWith('-here')) {
-				message.reply({ embeds: [emb] });
-			}
-			else {
-				message.react('📨');
-				message.author.send({ embeds: [emb] });
-			}
+			message.reply({ embeds: [emb] });
 
-		}
-		else { // no specific command specified (all or specific help embed)
-			if (message.content.endsWith('-here')) {
-				message.channel.send({ content: 'Here are all of our help embeds:', embeds: [embed1, embed2, embed3, embed4] });
-			}
-			else {
-				message.react('📨');
-				message.author.send({ content: 'Here are all of our help embeds:', embeds: [embed1, embed2, embed3, embed4] });
-			}
-			
-		
+		} else {
+			paginationEmbed(message, pages, ['◀️', '▶️'], '3600000');
 		}
 			
 	},

@@ -39,9 +39,9 @@ module.exports = {
                 .setDescription(`${status}\n\n**This is your original report:**\n${original}\n\n**Did you upload a file?**\n${file}`)
                 .addFields(
                     {
-                    name: 'Original Message ID:',
-                    value: `\`${messageId}\``
-                }, {
+                        name: 'Original Message ID:',
+                        value: `\`${messageId}\``
+                    }, {
                     name: 'Message Author ID:',
                     value: `\`${OG}\``
                 })

@@ -1,9 +1,6 @@
 const {	MessageEmbed } = require('discord.js');
 const config = require("../../config.json");
-const paginationEmbed = require('discord.js-pagination');
-
-
-// then code
+const paginationEmbed = require('@psibean/discord.js-pagination');
 
 module.exports = {
 	name: 'help',
@@ -16,7 +13,7 @@ module.exports = {
 	botPerms: [''],
 	async execute(message, args) {
 
-		// define embeds first
+		const helpEmbeds = [];
 
 		const embed1 = new MessageEmbed()
 			.setColor('#6683AD')
@@ -25,7 +22,8 @@ module.exports = {
 			.addFields({
 				name: 'These are commands any user can use.',
 				value: '```css\nping\navatar\nuser-info\nserver-info\nrules\nhelp\nerror\nreddit\ntech\nformat\nchannel\nbin\ndocs\nshare-code\nmods\njust-ask\npatience\nthanks\nwiki\nwrong-channel\nreport\nstatusreport\n\n```'
-			});
+			})
+			.addField("Check out all of our commands!", 'If you visit our [website](https://codinghelp.site/commands/) you can see all of our commands!', false);
 
 		const embed2 = new MessageEmbed()
 			.setColor('#6683AD')
@@ -34,7 +32,8 @@ module.exports = {
 			.addFields({
 				name: 'These are general **moderator** only commands. Meaning only **moderators** can use these commands.',
 				value: '```css\nprune\nserver\npartners\ncompletedreport\nbot-status\nserver-status\nsub-status\ndm\n```'
-			});
+			})
+			.addField("Check out all of our commands!", 'If you visit our [website](https://codinghelp.site/commands/) you can see all of our commands!', false);
 
 		const embed3 = new MessageEmbed()
 			.setColor('#6683AD')
@@ -46,7 +45,8 @@ module.exports = {
 			}, {
 				name: 'These are our **moderator** only commands for our Suggestions System.',
 				value: '```css\nprog-sugg\ndenied-sugg\ncompletedsugg\n```'
-			});
+			})
+			.addField("Check out all of our commands!", 'If you visit our [website](https://codinghelp.site/commands/) you can see all of our commands!', false);
 
 		const embed4 = new MessageEmbed()
 			.setColor('#6683AD')
@@ -60,13 +60,15 @@ module.exports = {
 				value: '```css\nadd-members\nadd-users\ncheck-participants\nremove-participant\nstart-challenge\nchallenge\nedit-challenge\nmods-check-submissions\nreviewed\npurge-submissions\nend-challenge\n```'
 			})
 			.addField("Check out all of our commands!", 'If you visit our [website](https://codinghelp.site/commands/) you can see all of our commands!', false);
-		
-		pages = [
-			embed1,
-			embed2,
-			embed3,
-			embed4
-		];
+
+		const footerResolver = (currentPageIndex, pagesLength) =>
+			`Page ${currentPageIndex + 1} / ${pagesLength}: ${(currentPageIndex % 2 === 0) ? 'Thanks for using r/CodingHelp!' : 'Thanks for using r/CodingHelp!'}`;
+		const collectErrorHandler = ({ error }) => console.log(error);
+
+		helpEmbeds.push(embed1);
+		helpEmbeds.push(embed2);
+		helpEmbeds.push(embed3);
+		helpEmbeds.push(embed4);
 
 		let cmdd = args[0];
 
@@ -108,10 +110,10 @@ module.exports = {
 
 			emb.addField("Check out all of our commands!", 'If you visit our [website](https://codinghelp.site/commands/) you can see all of our commands!', false);
 
-			message.reply({ embeds: [emb] });
+			interaction.reply({ embeds: [emb] });
 
 		} else {
-			paginationEmbed(message, pages, ['◀️', '▶️'], '3600000');
+			paginationEmbed(interaction, helpEmbeds, { footerResolver, collectErrorHandler, timeout: 120000, idle: 60000 });
 		}
 			
 	},

@@ -4,7 +4,7 @@
 */
 const fs = require('fs');
 const Discord = require('discord.js');
-const client = new Discord.Client({ intents: [Discord.Intents.FLAGS.GUILDS, Discord.Intents.FLAGS.GUILD_MESSAGES] });
+const client = new Discord.Client({ intents: [Discord.Intents.FLAGS.GUILDS, Discord.Intents.FLAGS.GUILD_MESSAGES, Discord.Intents.FLAGS.GUILD_MESSAGE_REACTIONS] });
 
 // configurations
 const config = require('./config.json');
@@ -19,6 +19,7 @@ client.cooldowns = new Discord.Collection();
 const { cooldowns } = client;
 let connection;
 
+// regular commands
 function readFilesFromPath(pathString) {
   const directoryEntries = fs.readdirSync(pathString, { withFileTypes: true });
 

@@ -30,6 +30,6 @@ module.exports = {
             )
             .setTimestamp()
             .setFooter('Thanks for your interest!', config.bot.avatar);
-        message.reply({ embeds: [embed] });
+        interaction.reply({ embeds: [embed] });
     }
 }

@@ -1,7 +1,7 @@
 module.exports = {
     name: 'wiki',
     description: 'Refers people to the wiki for their questions.',
-    aliases: ['knowledgebase', 'kb', 'site'],
+    aliases: ['knowledgebase', 'kb', 'site', 'website', 'www'],
     usage: '++wiki',
     inHelp: 'yes',
     example: '++wiki or ++kb',

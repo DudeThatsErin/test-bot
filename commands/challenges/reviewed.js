@@ -13,46 +13,26 @@ module.exports = {
     botPerms: [''],
     modOnly: 'yes',
     challengeMods: 'yes',
-    async execute (message, args) {
-                let challengeNo = args[0];
-                let points = args[1];
-                let msgId = args[2];
-                let moderator = message.author.id;
+    async execute(interaction) {
+        let points = interaction.options.get('points').value;
+        let msgId = interaction.options.get('message-id').value;
+        let moderator = interaction.user.id;
 
-            if (!challengeNo) {
-                message.react('❌');
-                    message.channel.send('You need to tell me what challenge number you would like to review.');
-                    return;
-                } else {
-                    if (!points) {
-                        message.react('❓');
-                        message.channel.send('You need to tell me how many points to give the original author of this submission.');
-                        return;
-                    } else {
-                        if (!msgId) {
-                            message.react('❓');
-                            message.channel.send('You need to include the message ID for the submission you would like to review. Without this I will not know which message to review.');
-                            return;
-                        } else {
-                            connection.query(
-                                `UPDATE Submissions SET moderator = ? WHERE msgId = ? AND guildId = ?;`,
-                                [moderator, msgId, message.guild.id]
-                            );
-                            const result = await connection.query(
-                                `SELECT author FROM Submissions WHERE msgId = ? AND guildId = ?;`,
-                                [msgId, message.guild.id]
-                            );
-                            let user = result[0][0].author;
-                            const Author = message.client.users.cache.get(user);
-                            connection.query(
-                                `UPDATE Submissions SET points = ? AND moderator = ? WHERE msgId = ?;`,
-                                [points, moderator, msgId]
-                            );
+        const msg = await connection.query(
+            `SELECT msgId FROM Submissions WHERE msgId = ?;`,
+            [msgId]
+        );
+        console.log(msg[0])
+        if (msg === 'undefined' || msg == 'undefined' || msg === undefined || msg == undefined) {
+            interaction.reply('That message ID was not found.');
+        }
 
-                            message.react('👍');
-                        }
-                    }
-                }
+        await connection.query(
+            `UPDATE Submissions SET moderator = ? AND points = ? WHERE msgId = ?;`,
+            [moderator, points, msgId]
+        );
+
+        interaction.reply('I have reviewed the submission.');
 
     }
 }

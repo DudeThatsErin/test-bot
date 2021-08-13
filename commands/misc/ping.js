@@ -10,11 +10,11 @@ module.exports = {
   inHelp: 'yes',
   userPerms: [''],
   botPerms: [''],
-  execute(message, args, client) { 
-    let days = Math.floor(message.client.uptime / 86400000);
-    let hours = Math.floor(message.client.uptime / 3600000) % 24;
-    let minutes = Math.floor(message.client.uptime / 60000) % 60;
-    let seconds = Math.floor(message.client.uptime / 1000) % 60;
+  execute(interaction, client) { 
+    let days = Math.floor(interaction.client.uptime / 86400000);
+    let hours = Math.floor(interaction.client.uptime / 3600000) % 24;
+    let minutes = Math.floor(interaction.client.uptime / 60000) % 60;
+    let seconds = Math.floor(interaction.client.uptime / 1000) % 60;
 
     let embed = new MessageEmbed()
       .setColor('#ffffff')
@@ -25,6 +25,6 @@ module.exports = {
       .setTimestamp()
       .setFooter(`Thanks for using ${config.bot.name}!`, config.bot.avatar)
 
-    message.reply({ embeds: [embed] });
+    interaction.reply({ embeds: [embed] });
   }
 };

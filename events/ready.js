@@ -1,7 +1,9 @@
+const config = require('../config.json');
+
 module.exports = {
     name: 'ready',
     once: true,
-    async execute(client) {
+    async execute(interaction, client) {
         console.log('|-----------------------------------|')
         console.log('          Logging In...             ')
         console.log('|-----------------------------------|')
@@ -11,6 +13,6 @@ module.exports = {
         console.log('|-----------------------------------|')
 
         client.user.setPresence({ activities: [{ name: 'with discord.js' }] });
-    
+
     }
 }

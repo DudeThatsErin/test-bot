@@ -5,12 +5,25 @@ const connection = require('../../database.js');
 module.exports = {
     name: 'reviewed',
     description: 'This gives **mods** the ability to review submissions.',
-    aliases: ['mark', 'review'],
-    usage: '++reviewed [challenge number] <number of points> [message ID]',
-    example: '++reviewed 1 1 841143871689064448',
+    usage: '/reviewed [message ID] [number of points]',
+    options: [
+        {
+            name: 'message-id',
+            type: 'STRING',
+            required: true,
+            description: 'Please enter the message ID for the message you want to mark as reviewed.',
+        },
+        {
+            name: 'points',
+            type: 'STRING',
+            required: true,
+            description: 'How many points are you awarding?'
+        }
+    ],
+    example: '/reviewed 841143871689064448 1',
     inHelp: 'yes',
-    userPerms: [''],
-    botPerms: [''],
+    userPerms: ['SEND_MESSAGES', 'ADD_REACTIONS', 'READ_MESSAGE_HISTORY', 'ATTACH_FILES', 'EMBED_LINKS', 'VIEW_CHANNEL'],
+    botPerms: ['SEND_MESSAGES', 'ADD_REACTIONS', 'READ_MESSAGE_HISTORY', 'ATTACH_FILES', 'EMBED_LINKS', 'VIEW_CHANNEL'],
     modOnly: 'yes',
     challengeMods: 'yes',
     async execute(interaction) {
@@ -22,7 +35,7 @@ module.exports = {
             `SELECT msgId FROM Submissions WHERE msgId = ?;`,
             [msgId]
         );
-        console.log(msg[0])
+
         if (msg === 'undefined' || msg == 'undefined' || msg === undefined || msg == undefined) {
             interaction.reply('That message ID was not found.');
         }
@@ -32,7 +45,7 @@ module.exports = {
             [moderator, points, msgId]
         );
 
-        interaction.reply('I have reviewed the submission.');
+        interaction.reply({ content: '✅ I have reviewed the submission.', ephemeral: true });
 
     }
 }

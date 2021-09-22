@@ -1,6 +1,6 @@
 const Discord = require('discord.js');
-const config = require('../../config.json');
-
+const config = require('../../config/config.json');
+const ee = require('../../config/embed.json');
 module.exports = {
     name: 'erin',
     aliases: ['me', 'dev'],
@@ -9,13 +9,14 @@ module.exports = {
     inHelp: 'yes',
     cooldown: 0,
     example: '++erin or ++dev',
-    permissions: '',
+    botPerms: [''],
+    userPerms: [''],
     ownerOnly: 'yes',
     note: '',
     execute(message, args, client) {
 
         const embed = new Discord.MessageEmbed()
-            .setColor('WHITE')
+            .setColor(ee.rand_color)
             .setTitle('Here are all of the commands you can use, Erin!')
             .setDescription('\`\`\`css\nadd-guilds\nadd-patron\nbot-status\nserver-status\nserver\nremove-guilds\nclear-suggs\ncheck-patrons\nremove-patron\nin-prog\ncompleted\ntest (test command... new stuff)\`\`\`')
             .addFields({

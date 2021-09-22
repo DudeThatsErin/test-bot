@@ -1,11 +1,11 @@
 const connection = require('../../database.js');
 const Discord = require('discord.js');
-const config = require('../../config.json');
+const config = require('../../config/config.json');
 
 module.exports = {
     name: 'progressreport',
     description: 'You can report problems with Sakura Moon to the developers so that they can fix it.**Note:** Images or Files will *not* be accepted. Please be as detailed as possible via text.',
-    aliases: ['reports', 'err', 'error', 'issue', 'issues'],
+    aliases: ['progress-report', 'pr', 'progreport', 'prgrpt'],
     inHelp: 'yes',
     usage: '++progressreport <report>',
     example: '++progressreport The bot is broken!',
@@ -44,7 +44,7 @@ module.exports = {
                 .setDescription(`**This is the original report:**\n${original}\n\n**This is the updated status:**\n${description}`)
                 .setFooter('If this is incorrect please report this!', config.bot.avatar)
 
-            
+
             chnnel.messages.fetch(msgId).then(message => {
                 report.addField('Original Message ID:', `\`${msgId}\``)
                 report.addField('Message Author ID', `\`${OG}\``);

@@ -1,5 +1,6 @@
 const Discord = require('discord.js');
-const config = require('../../config.json');
+const config = require('../../config/config.json');
+const ee = require('../../config/embed.json');
 
 module.exports = {
     name: 'sub-status',
@@ -18,7 +19,7 @@ module.exports = {
 
         const channel = client.channels.cache.find(channel => channel.id === config.bot.announcementsId);
         let embed = new Discord.MessageEmbed()
-            .setColor('#EB74EE')
+            .setColor(ee.sub_status)
             .setTitle('Hello, The Moderators have a new update for you!')
             .setDescription(`${reason}`)
             .setTimestamp()

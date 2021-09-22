@@ -1,4 +1,4 @@
-const config = require('../../config.json');
+const config = require('../../config/config.json');
 const Discord = require("discord.js");
 
 //Rule Embeds
@@ -82,13 +82,13 @@ module.exports = {
             return;
         }
 
-        
+
         if (!allOrNumber) { // all nor number is not specified
             message.react('❌');
             message.channel.send({ content: 'You need to tell me which rule (or all rules) to send to the channel or user. Please use this format:\n\`++rules @username or ID [rule # or all]\`' });
             return;
         }
-            
+
         if (message.content.endsWith('-here')) {
             if (allOrNumber === 'all') { // all specified
                 await message.channel.send({ content: 'These are all of our server\'s rules.' });

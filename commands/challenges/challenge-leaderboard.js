@@ -1,13 +1,13 @@
 const Discord = require('discord.js');
-const connection = require('../../database.js');
+const connection = require('/root/codinghelp-bot/database.js');
 
 
 module.exports = {
-    name: 'challenge-leaderboard',
+    name: 'leaderboard',
     description: 'This gives users the ability to see the top 10 users on the leaderboard and also their position on the leaderboard.',
-    aliases: ['cldbd', 'cleaderboard', 'cldbd', 'clbd', 'cldb'],
-    usage: '++challenge-leaderboard',
-    example: '++challenge-leaderboard or ++cldb or ++clbd',
+    aliases: ['ldbd', 'challenge-leaderboard', 'cleaderboard', 'cldbd', 'lbd', 'ldb'],
+    usage: '++leaderboard',
+    example: '++leaderboard or ++ldb or ++lbd',
     inHelp: 'yes',
     challengeMods: 'yes',
     modOnly: 'yes',
@@ -56,7 +56,7 @@ module.exports = {
             )
             .setFooter('If there is an error here, please report this!');
 
-            interaction.reply({ embeds: [embed2] });
+            message.channel.send({ embeds: [embed2] });
 
          } else {
             const ponts = await connection.query(
@@ -74,7 +74,7 @@ module.exports = {
                 )
                 .setFooter('If there is an error here, please report this!');
 
-            interaction.reply({ embeds: [embed2] });
+            message.channel.send({ embeds: [embed2] });
                 }
     }
 }

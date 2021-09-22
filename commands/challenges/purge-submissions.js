@@ -1,26 +1,26 @@
 const connection = require('../../database.js');
 
+
 module.exports = {
     name: 'purge-submissions',
-    description: 'This gives **mods** the ability to purge all submissions from the submissions database.',
-    note: 'This does *not* delete them from the channel within discord.',
-    usage: '/purge-submissions',
-    options: [],
-    example: '/purge-submissions',
+    description: 'This gives **mods** the ability to purge all submissions from the submissions database. *Note:* This does *not* delete them from the channel within discord.',
+    aliases: ['purges', 'psubmissions', 'psubs', 'purgesubs', 'deletesubs', 'delete-subs'],
+    usage: '++purge-submissions',
+    example: '++purge-submissions',
     inHelp: 'yes',
     challengeMods: 'yes',
     modOnly: 'yes',
-    userPerms: ['MANGE_MESSAGES', 'VIEW_CHANNELS', 'SEND_MESSAGES', 'EMBED_LINKS', 'ATTACH_FILES'],
-    botPerms: ['MANGE_MESSAGES', 'VIEW_CHANNELS', 'SEND_MESSAGES', 'EMBED_LINKS', 'ATTACH_FILES'],
-    async execute(interaction) {
+    userPerms: [''],
+    botPerms: [''],
+    async execute (message, args) {
+            
+            connection.query(
+                `DELETE FROM Submissions WHERE guildId = ?;`,
+                [message.guild.id]
+            );
+        message.react('✅');
 
-        connection.query(
-            `DELETE FROM Submissions WHERE guildId = ?;`,
-            [interaction.guild.id]
-        );
-        interaction.reply({ content: '✅', ephermal: true });
 
-
-
+        
     }
 }

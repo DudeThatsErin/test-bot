@@ -1,16 +1,12 @@
 const { MessageEmbed } = require('discord.js');
-const config = require('../../config.json');
+const config = require('../config/config.json');
 
 module.exports = {
   name: 'ping',
   description: 'Makes sure the bot can hear commands.',
-  aliases: ['uptime', 'beep', 'boop', 'alive'],
-  usage: '++ping',
   cooldown: 5,
-  inHelp: 'yes',
-  userPerms: [''],
-  botPerms: [''],
-  execute(interaction, client) { 
+  type: 'STRING',
+  execute(interaction, client) {
     let days = Math.floor(interaction.client.uptime / 86400000);
     let hours = Math.floor(interaction.client.uptime / 3600000) % 24;
     let minutes = Math.floor(interaction.client.uptime / 60000) % 60;
@@ -25,6 +21,6 @@ module.exports = {
       .setTimestamp()
       .setFooter(`Thanks for using ${config.bot.name}!`, config.bot.avatar)
 
-    interaction.reply({ embeds: [embed] });
+    interaction.reply({ embeds: [embed], ephemeral: true });
   }
 };

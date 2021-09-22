@@ -4,7 +4,7 @@ module.exports = {
     name: 'server',
     aliases: ['server-welcome', 'welcome', 'discord', 'roles', 'faq'],
     description: 'Pushes an embed to display in the channel about a the server.',
-    usage: 's.server',
+    usage: '++server',
     note: '',
     permissions: '',
     ownerOnly: 'yes',

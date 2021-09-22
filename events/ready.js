@@ -1,4 +1,4 @@
-const config = require('../config.json');
+const config = require('../config/config.json');
 
 module.exports = {
     name: 'ready',
@@ -12,7 +12,7 @@ module.exports = {
         console.log('          Error Logs...             ')
         console.log('|-----------------------------------|')
 
-        client.user.setPresence({ activities: [{ name: 'with discord.js' }] });
+        client.user.setPresence({ activities: [{ name: 'slash commands! Use + prefix' }] });
 
     }
 }

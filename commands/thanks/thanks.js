@@ -2,7 +2,6 @@ const connection = require('../../database.js');
 
 module.exports = {
   name: 'thanks',
-  description: 'This allows users to thank another user for providing help.',
   aliases: ['thnks', 'tks', 'tx', 'thank'],
   usage: '++thanks <@username or ID>',
   inHelp: 'yes',

@@ -1,5 +1,6 @@
 const { MessageEmbed } = require('discord.js');
-const config = require('../../config.json');
+const config = require('../../config/config.json');
+const ee = require('../../config/embed.json');
 
 module.exports = {
     name: 'dm',
@@ -25,7 +26,7 @@ module.exports = {
             else {
 
                 const embed = new MessageEmbed()
-                    .setColor('RED')
+                    .setColor(ee.dm_color)
                     .setTitle('Official Message from the r/CodingHelp Moderators')
                     .setDescription(dmmessage)
                     .setAuthor(user.tag, user.displayAvatarURL({ dynamic: true }))

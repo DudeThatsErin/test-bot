@@ -1,6 +1,6 @@
 const connection = require('../../database.js');
 const Discord = require('discord.js');
-const config = require('../../config.json');
+const config = require('../../config/config.json');
 
 module.exports = {
     name: 'report',
@@ -11,21 +11,21 @@ module.exports = {
     example: '++report The bot is broken!',
     userPerms: [''],
     botPerms: [''],
-    async execute(interaction, client) {
-        let author = interaction.user.id;
-        let usr = interaction.guild.members.cache.get(author);
-        let messageId = interaction.id;
-        let description = interaction.options.get('issue').value;
-        if (!description && !interaction.attachments.first()) return interaction.reply('Please tell me what you would like to report. You can upload a file but please use words as well. A file alone does not tell me very much at all.')
+    async execute(message, args, client) {
+        let author = message.author.id;
+        let usr = message.guild.members.cache.get(author);
+        let messageId = message.id;
+        let description = args.slice(0).join(' ');
+        if (!description && !message.attachments.first()) return message.reply('Please tell me what you would like to report. You can upload a file but please use words as well. A file alone does not tell me very much at all.')
         const channel = client.channels.cache.find(channel => channel.id === config.bot.reportsChId);
-        let authorUsername = interaction.user.username;
-        let avatar = interaction.user.displayAvatarURL({ dynamic: true });
+        let authorUsername = message.author.username;
+        let avatar = message.author.displayAvatarURL({ dynamic: true });
 
         const url = 'no' || message.attachments.first().url;
 
         let report2 = new Discord.MessageEmbed()
             .setColor('#D4AC0D')
-            .setTitle(`Oops! A wild *bug* has appeared!`)
+            .setTitle(`Oops! A *bug* has appeared!`)
             .setAuthor(`${authorUsername}`)
             .setThumbnail(`${avatar}`)
             .setDescription(`**This is the report:**\n${description}\n\n**Any files uploaded?**\n${url}`)
@@ -34,18 +34,16 @@ module.exports = {
 
         const msg = await channel.send({ embeds: [report2] });
 
+        message.react('✅');
         const reportNo = msg.id;
-        let report = new Discord.MessageEmbed()
-            .setColor('#D4AC0D')
-            .setTitle('Erin has received your report.')
-            .setDescription(`**This is the report:**\n${description}\n\n**Any files uploaded?**\n${url}\n\n**Message ID**\n\`${reportNo}\`\nPlease save this message ID. Use the slash command \`/status-report ${reportNo}\` to check the status of your report.`);
+        report2.addField('Message ID', `\`${reportNo}\``);
+        report2.addField('Please save this message ID. Use the following command to check the status of the report in the future:', `\`++statusreport ${reportNo}\``);
 
         await connection.query(
             `INSERT INTO reports (messageId, authorId, avatar, description, file) VALUES(?, ?, ?, ?, ?);`,
             [reportNo, author, avatar, description, url]
         );
 
-        interaction.reply({ content: `I have sent your report to ${config.bot.devName}! Please check your private messages for the message ID so that you can check the status of your report. Thank you!` });
-        usr.send({ embeds: [report] })
+        usr.send({ content: `I have sent your report to ${config.bot.devName}! Thank you!`, embeds: [report2] })
     }
 }

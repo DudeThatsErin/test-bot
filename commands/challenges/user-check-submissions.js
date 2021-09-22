@@ -11,23 +11,23 @@ module.exports = {
     inHelp: 'yes',
     userPerms: [''],
     botPerms: [''],
-    async execute(interaction) {
-        let name = interaction.user.id;
+    async execute (message, args) {
+        let name = message.author.id;
 
         const result = await connection.query(
             `SELECT * FROM Submissions WHERE guildId = ? AND author = ?;`,
-            [interaction.guild.id, name]
+            [message.guild.id, name]
         );
 
-        for (const row of result[0]) {
+        for (const row of result[0]){
             const Submissions = row.message || 'No message included with this submission.';
             const dayNo = row.challengeNo;
             const moderator = row.moderator;
             const msgId = row.msgId;
-            const modname = await interaction.client.users.fetch(moderator).catch(err => { console.log(err); });
+            const modname = await message.client.users.fetch(moderator).catch(err => { console.log(err); });
             const attachment = row.file || 'No attachment included for this submission';
-
-
+                    
+                    
             // notDefined Embed
             const notDefined = new Discord.MessageEmbed()
                 .setColor('#3e5366')
@@ -42,10 +42,10 @@ module.exports = {
                 .setDescription(`The submission is as follows:\n${Submissions}\n\nYou had this attachment:\n${attachment}\n\nThe message ID is as follows: \`${msgId}\`\n\nThe moderator that reviewed it was: ${modname}.`)
                 .setFooter('If there is a problem with this, please report this!');
 
-            if (moderator === '0') {
-                interaction.client.users.cache.get(`${name}`).send({ embeds: [notDefined] });
+            if(moderator === '0') {
+                message.client.users.cache.get(`${name}`).send({ embeds: [notDefined] });
             } else {
-                interaction.client.users.cache.get(`${name}`).send({ embeds: [defined] });
+                message.client.users.cache.get(`${name}`).send({ embeds: [defined] });
             }
         }
     }

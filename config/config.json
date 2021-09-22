@@ -1,0 +1,35 @@
+{
+	"mysql": {
+	  "host": "localhost",
+	  "user": "crazyyall_usr",
+	  "password": "eX8fAUlDD5iBWr8e",
+	  "database": "crazyyall"
+	},
+	"bot": {
+	  "prefix": "+",
+	  "token": "ODY3Nzg0MjU3MTYxNjU4MzY4.YPmJEQ.1sGCHGWcJQCkNeKnmabWCz7wT74",
+	  "name": "r/CodingHelp",
+	  "tag": "r/CodingHelp#6984",
+	  "id": "739190110402379876",
+	  "avatar": "https://codinghelp.site/bots/codinghelp.png",
+	  "github": "https://github.com/dudethatserin/codinghelp-bot/",
+	  "website": "https://codinghelp.site",
+	  "serverId": "359760149683896320",
+	  "testServerId": "718253204147798047",
+	  "devName": "Erin",
+	  "devId": "455926927371534346",
+	  "reportsChId": "860892900367532072",
+	  "modmChId": "802558039432888341",
+	  "introChId": "383032186317832202",
+	  "partnersChId": "773592987141668885",
+	  "channelGuideId": "808548019041468416",
+	  "announcementsId": "359760352470368281",
+	  "suggestionsId": "433877613128450061",
+	  "challengesId": "8127675970439086480",
+	  "chLeaderboardId": "812767941791580201",
+	  "commandsId": "433962402292432896",
+	  "ownerID": "455926927371534346"
+	}
+	
+  }
+  

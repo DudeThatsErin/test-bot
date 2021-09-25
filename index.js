@@ -8,6 +8,9 @@ const client = new Discord.Client({
   intents: [
     Discord.Intents.FLAGS.GUILDS
   ], });
+const { REST } = require('@discordjs/rest');
+const { Routes } = require('discord-api-types/v9');
+const { SlashCommandBuilder } = require('@discordjs/builders');
 
 // configurations
 const config = require('./config/config.json');
@@ -39,6 +42,7 @@ function readFilesFromPath(pathString) {
     return filteredEntries;
   }, []);
 }
+
 
 // Call the read files function with the root folder of the commands and
 // store all the file paths in the constant.
@@ -90,9 +94,25 @@ commandFilePaths1.forEach((filePath) => {
   if (cmd.options) { object.options = cmd.options; }
 
   data.push(object);
+  //client.commands.delete(cmd.name, cmd);
   client.commands.set(cmd.name, cmd);
   console.log(cmd.name + ' loaded successfully!');
 });
+
+
+
+
+// events
+console.log('|-----------------------------------|')
+console.log('       Loading Event Files...        ')
+console.log('|-----------------------------------|')
+const eventFiles = fs.readdirSync(`${__dirname}/events`).filter(file => file.endsWith('.js'));
+for (const file of eventFiles) {
+  const event = require(`${__dirname}/events/${file}`);
+  if (event.once) client.once(event.name, (...args) => event.execute(...args, client));
+  else client.on(event.name, (...args) => event.execute(...args, client));
+  console.log(event.name + ' loaded successfully!');
+}
 
 
 // end of file

@@ -3,7 +3,7 @@ const config = require('../config/config.json');
 module.exports = {
     name: 'ready',
     once: true,
-    async execute(interaction, client) {
+    async execute(client) {
         console.log('|-----------------------------------|')
         console.log('          Logging In...             ')
         console.log('|-----------------------------------|')
